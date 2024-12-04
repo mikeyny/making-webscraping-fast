@@ -28,7 +28,7 @@ def collect_tweets():
     while True:
         response = requests.get(api_url_retrieve, headers=headers)
         data = response.json()
-        if data.get("status") == "running":
+        if not isinstance(data, list) and data.get("status") == "running":
             print("Snapshot is not ready yet, trying again in 10 seconds...")
             time.sleep(10)
         else:
